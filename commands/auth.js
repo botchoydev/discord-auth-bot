@@ -13,7 +13,7 @@ class AuthLicenseCommand extends Command {
                     id: 'key',
                     type: 'string',
                     prompt: {
-						start: async(message) => {							
+						start: async(message) => {
 							const embed = new MessageEmbed()
 								.setTitle('License key')
 								.setDescription('Enter your license key')
@@ -29,17 +29,21 @@ class AuthLicenseCommand extends Command {
     }
 
     exec(message, args) {
+		// Post licenseKey and discord ID to authenticator
 		licenseService.auth(message.author.id, args.key)
 			.then((res) => {
+				// Respond with success message
 				let verified = new MessageEmbed()
 					.setTitle(':white_check_mark: **Your license has been verified successfully!**')
 					.setColor('#65c66b');
 						
+				// Add member role to message author
 				this.client.guilds.get(config.serverId).members.get(message.author.id).roles.add(config.memberRoleId);
 				
 				return message.reply(verified)
 			})
 			.catch(err => {
+				// Respond with error message
 				if(err.response) return message.reply(err.response.data);
 
 				console.log(err);

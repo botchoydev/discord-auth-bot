@@ -4,6 +4,7 @@ const config = require('../config.json');
 let licenseService = {
 	auth(discordId, key) {
 		return new Promise((resolve, reject) => {
+			// Post license key and discord id to auth API
 			axios.post(config.endpoints.auth, {
 				discordId: discordId,
 				licenseKey: key
