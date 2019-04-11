@@ -1,0 +1,8 @@
+{
+	"prefix": "?",
+	"serverId": "",
+	"memberRoleId": "",
+	"endpoints": {
+		"auth": "auth"
+	}
+}
